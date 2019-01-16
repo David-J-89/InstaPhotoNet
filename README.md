@@ -1,2 +1,2 @@
 # InstaPhotoNet
-A social photo site in ASP.NET Core - Angular 6 with Instagram-like functionality
+A social photo site in ASP.NET Core and Angular with Instagram-like functionality
