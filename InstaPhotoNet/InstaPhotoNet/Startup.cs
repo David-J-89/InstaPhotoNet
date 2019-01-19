@@ -34,8 +34,8 @@ namespace InstaPhotoNet
             //services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
             services.AddTransient<Seed>();
-            //services.AddScoped<IAuthRepository, AuthRepository>();
-            //services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
