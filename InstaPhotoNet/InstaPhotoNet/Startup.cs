@@ -1,13 +1,17 @@
 ﻿using AutoMapper;
 using InstaPhotoNet.Data;
+using InstaPhotoNet.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.Net;
 using System.Text;
 
 namespace InstaPhotoNet
@@ -31,7 +35,7 @@ namespace InstaPhotoNet
                     opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
             services.AddCors();
-            //services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
@@ -59,20 +63,20 @@ namespace InstaPhotoNet
             }
             else
             {
-                //app.UseExceptionHandler(builder =>
-                //{
-                //    builder.Run(async context =>
-                //    {
-                //        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                app.UseExceptionHandler(builder =>
+                {
+                    builder.Run(async context =>
+                    {
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-                //        var error = context.Features.Get<IExceptionHandlerFeature>();
-                //        if (error != null)
-                //        {
-                //            context.Response.AddApplicationError(error.Error.Message);
-                //            await context.Response.WriteAsync(error.Error.Message);
-                //        }
-                //    });
-                //});
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        if (error != null)
+                        {
+                            context.Response.AddApplicationError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message);
+                        }
+                    });
+                });
                 //app.UseHsts();
             }
 
