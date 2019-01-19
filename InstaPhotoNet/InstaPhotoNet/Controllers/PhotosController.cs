@@ -17,14 +17,14 @@ namespace InstaPhotoNet.Controllers
     [Authorize]
     [Route("api/users/{userId}/photos")]
     [ApiController]
-    public class PostsController : ControllerBase
+    public class PhotosController : ControllerBase
     {
         private readonly IPostRepository _repo;
         private readonly IMapper _mapper;
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
         private readonly Cloudinary _cloudinary;
 
-        public PostsController(IPostRepository repo, IMapper mapper,
+        public PhotosController(IPostRepository repo, IMapper mapper,
             IOptions<CloudinarySettings> cloudinaryConfig)
         {
             _repo = repo;
@@ -40,27 +40,27 @@ namespace InstaPhotoNet.Controllers
             _cloudinary = new Cloudinary(acc);
         }
 
-        [HttpGet("{id}", Name = "GetPost")]
+        [HttpGet("{id}", Name = "GetPhoto")]
 
-        public async Task<IActionResult> GetPost(int id)
+        public async Task<IActionResult> GetPhoto(int id)
         {
-            var postFromRepo = await _repo.GetPost(id);
+            var photoFromRepo = await _repo.GetPhoto(id);
 
-            var post = _mapper.Map<PhotoForReturnDto>(postFromRepo);
+            var photo = _mapper.Map<PhotoForReturnDto>(photoFromRepo);
 
-            return Ok(post);
+            return Ok(photo);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddPhotoForUser(int userId,
-            [FromForm]PhotoForCreationDto postForCreationDto)
+            [FromForm]PhotoForCreationDto photoForCreationDto)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
             var userFromRepo = await _repo.GetUser(userId);
 
-            var file = postForCreationDto.File;
+            var file = photoForCreationDto.File;
 
             var uploadResult = new ImageUploadResult();
 
@@ -80,20 +80,20 @@ namespace InstaPhotoNet.Controllers
 
             }
 
-            postForCreationDto.Url = uploadResult.Uri.ToString();
-            postForCreationDto.PublicId = uploadResult.PublicId;
+            photoForCreationDto.Url = uploadResult.Uri.ToString();
+            photoForCreationDto.PublicId = uploadResult.PublicId;
 
-            var post = _mapper.Map<Photo>(postForCreationDto);
+            var photo = _mapper.Map<Photo>(photoForCreationDto);
 
-            if (!userFromRepo.Posts.Any(u => u.IsProfile))
-                post.IsProfile = true;
+            if (!userFromRepo.Photos.Any(u => u.IsProfile))
+                photo.IsProfile = true;
 
-            userFromRepo.Posts.Add(post);
+            userFromRepo.Photos.Add(photo);
 
             if (await _repo.SaveAll())
             {
-                var postToReturn = _mapper.Map<PhotoForReturnDto>(post);
-                return CreatedAtRoute("GetPhoto", new { id = post.Id }, postToReturn);
+                var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
+                return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
             }
 
             return BadRequest("Could not add the photo");
@@ -114,13 +114,13 @@ namespace InstaPhotoNet.Controllers
 
             var photoFromRepo = await _repo.GetPhoto(id);
 
-            if (photoFromRepo.IsMain)
+            if (photoFromRepo.IsProfile)
                 return BadRequest("This is already the main photo");
 
-            var currentMainPhoto = await _repo.GetMainPhotoForUser(userId);
-            currentMainPhoto.IsMain = false;
+            var currentMainPhoto = await _repo.GetProfilePhotoForUser(userId);
+            currentMainPhoto.IsProfile = false;
 
-            photoFromRepo.IsMain = true;
+            photoFromRepo.IsProfile = true;
 
             if (await _repo.SaveAll())
                 return NoContent();
@@ -141,7 +141,7 @@ namespace InstaPhotoNet.Controllers
 
             var photoFromRepo = await _repo.GetPhoto(id);
 
-            if (photoFromRepo.IsMain)
+            if (photoFromRepo.IsProfile)
                 return BadRequest("cannot delete main photo");
 
             if (photoFromRepo.PublicId != null)
@@ -166,5 +166,6 @@ namespace InstaPhotoNet.Controllers
 
             return BadRequest("Failed to delete the photo");
         }
+
     }
 }
