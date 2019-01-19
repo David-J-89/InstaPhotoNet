@@ -22,11 +22,11 @@ namespace InstaPhotoNet.Helpers
                 });
 
 
-            CreateMap<Post, PostsForDetailedDto>();
+            CreateMap<PostsForDetailedDto, Post>();
             CreateMap<UserForUpdateDto, User>();
-            CreateMap<Post, PostForReturnDto>();
+            CreateMap<PostForReturnDto, Post>();
             CreateMap<PostForCreationDto, Post>();
-            CreateMap<Post, PostForListDto>();
+            ;
         }
     }
 }

@@ -10,5 +10,10 @@ namespace InstaPhotoNet.Helpers
             response.Headers.Add("Access-Control-Expose-Headers", "Application-Error");
             response.Headers.Add("Access-Control-Allow-Origin", "*");
         }
+
+        //public int CalculateHours(this DateTime the DateTime)
+        //{
+        //    var hours = DateTime.Today.Hour - DateAdded
+        //}
     }
 }
