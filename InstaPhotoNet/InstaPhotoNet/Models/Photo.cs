@@ -2,7 +2,7 @@
 
 namespace InstaPhotoNet.Models
 {
-    public class Post
+    public class Photo
     {
         public int Id { get; set; }
 

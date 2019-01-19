@@ -25,29 +25,29 @@ namespace InstaPhotoNet.Data
             _context.Remove(entity);
         }
 
-        public async Task<Post> GetPost(int id)
+        public async Task<Photo> GetPhoto(int id)
         {
-            var post = await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
+            var photo = await _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
 
-            return post;
+            return photo;
         }
 
-        public async Task<IEnumerable<Post>> GetPosts()
+        public async Task<IEnumerable<Photo>> GetPhotos()
         {
-            var posts = await _context.Posts.OrderBy(post => post.DateAdded).ToListAsync();
+            var photos = await _context.Photos.OrderBy(photo => photo.DateAdded).ToListAsync();
 
-            return posts;
+            return photos;
         }
 
-        public async Task<Post> GetProfilePhotoForUser(int userId)
+        public async Task<Photo> GetProfilePhotoForUser(int userId)
         {
-            return await _context.Posts.Where(u => u.UserId == userId)
+            return await _context.Photos.Where(u => u.UserId == userId)
                 .FirstOrDefaultAsync(p => p.IsProfile);
         }
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _context.Users.Include(p => p.Posts).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
         }

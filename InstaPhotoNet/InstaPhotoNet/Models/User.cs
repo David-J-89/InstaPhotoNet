@@ -23,6 +23,6 @@ namespace InstaPhotoNet.Models
 
         public string Country { get; set; }
 
-        public ICollection<Post> Posts { get; set; }
+        public ICollection<Photo> Photos { get; set; }
     }
 }

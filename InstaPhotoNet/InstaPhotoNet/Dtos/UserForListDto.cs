@@ -18,6 +18,6 @@ namespace InstaPhotoNet.Dtos
 
         public string Country { get; set; }
 
-        public string PostUrl { get; set; }
+        public string PhotoUrl { get; set; }
     }
 }

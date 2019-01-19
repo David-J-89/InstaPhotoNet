@@ -10,22 +10,22 @@ namespace InstaPhotoNet.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<User, UserForListDto>()
-                    .ForMember(dest => dest.PostUrl, opt =>
+                    .ForMember(dest => dest.PhotoUrl, opt =>
                     {
-                        opt.MapFrom(src => src.Posts.FirstOrDefault(p => p.IsProfile).Url);
+                        opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsProfile).Url);
                     });
 
             CreateMap<User, UserForDetailedDto>()
-                .ForMember(dest => dest.PostUrl, opt =>
+                .ForMember(dest => dest.PhotoUrl, opt =>
                 {
-                    opt.MapFrom(src => src.Posts.FirstOrDefault(p => p.IsProfile).Url);
+                    opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsProfile).Url);
                 });
 
 
-            CreateMap<PostsForDetailedDto, Post>();
+            CreateMap<PhotosForDetailedDto, Photo>();
             CreateMap<UserForUpdateDto, User>();
-            CreateMap<PostForReturnDto, Post>();
-            CreateMap<PostForCreationDto, Post>();
+            CreateMap<PhotoForReturnDto, Photo>();
+            CreateMap<PhotoForCreationDto, Photo>();
             ;
         }
     }

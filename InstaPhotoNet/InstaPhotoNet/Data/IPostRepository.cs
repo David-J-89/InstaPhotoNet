@@ -12,12 +12,12 @@ namespace InstaPhotoNet.Data
 
         Task<bool> SaveAll();
 
-        Task<IEnumerable<Post>> GetPosts();
+        Task<IEnumerable<Photo>> GetPhotos();
 
         Task<User> GetUser(int id);
 
-        Task<Post> GetPost(int id);
+        Task<Photo> GetPhoto(int id);
 
-        Task<Post> GetProfilePhotoForUser(int userId);
+        Task<Photo> GetProfilePhotoForUser(int userId);
     }
 }

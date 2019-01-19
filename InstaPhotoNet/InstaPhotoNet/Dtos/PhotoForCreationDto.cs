@@ -3,7 +3,7 @@ using System;
 
 namespace InstaPhotoNet.Dtos
 {
-    public class PostForCreationDto
+    public class PhotoForCreationDto
     {
         public string Url { get; set; }
 
@@ -16,7 +16,7 @@ namespace InstaPhotoNet.Dtos
         public string PublicId { get; set; }
 
 
-        public PostForCreationDto()
+        public PhotoForCreationDto()
         {
             DateAdded = DateTime.Now;
         }

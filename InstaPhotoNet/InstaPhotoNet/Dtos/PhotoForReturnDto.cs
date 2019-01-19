@@ -2,7 +2,7 @@
 
 namespace InstaPhotoNet.Dtos
 {
-    public class PostForReturnDto
+    public class PhotoForReturnDto
     {
         public int Id { get; set; }
         public string Url { get; set; }
