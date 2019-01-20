@@ -2,9 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Client-SPA\src\app\_models\photo.ts" />
+    <None Remove="Client-SPA\src\app\_models\user.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Client-SPA\src\app\_services\" />
+    <Folder Include="Client-SPA\src\app\_resolvers\" />
+    <Folder Include="Client-SPA\src\app\_guards\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -20,6 +29,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Client-SPA\src\app\_models\photo.ts" />
+    <TypeScriptCompile Include="Client-SPA\src\app\_models\user.ts" />
   </ItemGroup>
 
 </Project>
