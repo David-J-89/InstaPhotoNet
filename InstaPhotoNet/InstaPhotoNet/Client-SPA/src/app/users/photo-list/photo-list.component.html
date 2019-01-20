@@ -1,0 +1,64 @@
+<!--<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-6">
+      <p *ngFor="let photo of photos"><img  src="photo.url" />photo.id</p>
+      <app-photo-card [photo]="photo"></app-photo-card>
+    </div>
+  </div>
+</div>-->
+<!--<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-6">-->
+<section class="container">
+  <div class="card">
+    <div class="card-header">
+      <div class="profile-img">
+      </div>
+      <div class="profile-info">
+        <div class="name">Karuche</div>
+        <div class="location"> New York, New York</div>
+      </div>
+      <div class="time">
+        1hr
+      </div>
+    </div>
+    <div *ngFor="let photo of photos">
+      <div class="content">
+        <img src="{{photo.url}}" />
+      </div>
+      <div class="card-footer">
+        <div class="likes">
+          21 likes
+        </div>
+        <div class="description">
+          <p>
+            <span class="username">"{{photo.description}}"</span> Hey just out here in miami!
+          </p>
+        </div>
+        <div class="comments">
+          <p>
+            <span class="username">bobby234</span> Hey just out here in miami!
+          </p>
+          <p>
+            <span class="username">melind98</span> Hey just out here in miami!
+          </p>
+        </div>
+        <hr />
+        <form>
+          <div class="heart">
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+          </div>
+          <div class="add-comment">
+            <input type="text" placeholder="Add a comment..." />
+          </div>
+          <div class="options">
+            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!--</div>
+    </div>
+</div>-->

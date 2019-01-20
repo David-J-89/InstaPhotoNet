@@ -6,14 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Client-SPA\src\app\routes.ts" />
+    <None Remove="Client-SPA\src\app\_guards\auth.guard.ts" />
+    <None Remove="Client-SPA\src\app\_guards\prevent-unsaved-changes.guard.ts" />
     <None Remove="Client-SPA\src\app\_models\photo.ts" />
     <None Remove="Client-SPA\src\app\_models\user.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Client-SPA\src\app\_services\" />
-    <Folder Include="Client-SPA\src\app\_resolvers\" />
-    <Folder Include="Client-SPA\src\app\_guards\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -32,6 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="Client-SPA\src\app\routes.ts" />
+    <TypeScriptCompile Include="Client-SPA\src\app\_guards\auth.guard.ts" />
+    <TypeScriptCompile Include="Client-SPA\src\app\_guards\prevent-unsaved-changes.guard.ts" />
     <TypeScriptCompile Include="Client-SPA\src\app\_models\photo.ts" />
     <TypeScriptCompile Include="Client-SPA\src\app\_models\user.ts" />
   </ItemGroup>
