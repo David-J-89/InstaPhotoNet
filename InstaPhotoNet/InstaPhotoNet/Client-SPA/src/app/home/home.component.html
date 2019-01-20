@@ -1,13 +1,14 @@
 <div class="container mt-5">
+  <h1>InstaPhotoNet Test</h1>
   <div *ngIf="registerMode" class="container">
     <div class="row justify-content-center">
       <div class="col-4">
-        <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+        <app-register> </app-register>
       </div>
     </div>
     <p class="lead"> Have an account? </p>
     <div class="test-center">
-      <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Login</button>
+      <button class="btn btn-primary btn-lg mr-2" (click)="loginToggle()">Login</button>
     </div>
   </div>
   <div>

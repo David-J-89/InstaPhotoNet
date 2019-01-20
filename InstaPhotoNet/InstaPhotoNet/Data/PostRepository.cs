@@ -52,6 +52,13 @@ namespace InstaPhotoNet.Data
             return user;
         }
 
+        public async Task<IEnumerable<User>> GetUsers()
+        {
+            var users = await _context.Users.Include(p => p.Photos).ToListAsync();
+
+            return users;
+        }
+
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
